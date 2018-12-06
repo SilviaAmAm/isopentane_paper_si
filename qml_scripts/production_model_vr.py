@@ -8,9 +8,11 @@ from sklearn import model_selection as modsel
 import tensorflow as tf
 import time
 from random import shuffle
+import os
 
 # Getting the dataset
-data = h5py.File("/home/sa16246/data_sets/cn_reactions/pm6_sampling/pbe_isopentane_cn_vr_no_hnc.hdf5", "r")
+cwd = os.path.dirname(os.path.realpath(__file__))
+data = h5py.File(cwd + "../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
 
 xyz_isopent = np.array(data.get("xyz"))
 ene_isopent = np.array(data.get("ene"))*2625.50
