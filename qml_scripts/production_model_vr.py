@@ -1,3 +1,7 @@
+"""
+This script trains a model on 10350 data points of the data set sampled using VR.
+"""
+
 from qml.aglaia.aglaia import ARMP
 import numpy as np
 import h5py
@@ -27,21 +31,22 @@ idx_test = np.where(traj_idx==22)[0]
 idx_train = np.where(traj_idx!=22)[0]
 shuffle(idx_train)
 
-# Making sure that the model is trained on the same number of samples as the constrained MD
+# Making sure that the model is trained on the same number of samples as the MD-NN
 idx_train_half = idx_train[:10350] 
 
-acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":100.06564927139748, "eta":39.81824764370754}
-
 # Creating the estimator
+acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":100.06564927139748, "eta":39.81824764370754}
 estimator = ARMP(iterations=2633, batch_size=22, l1_reg=1.46e-05, l2_reg=0.0001, learning_rate=0.0013, representation_name='acsf',
                  representation_params=acsf_params, tensorboard=True, store_frequency=25, hidden_layer_sizes=(185,))
 
 estimator.set_properties(ene_isopent)
 estimator.generate_representation(xyz_isopent, zs_isopent, method="fortran")
 
+# Fitting the estimator and scoring it
 estimator.fit(idx_train_half)
 score = estimator.score(idx_test)
 
+# Saving the model for later reuse
 model_name = "vr-nn"
 estimator.save_nn(model_name)
 

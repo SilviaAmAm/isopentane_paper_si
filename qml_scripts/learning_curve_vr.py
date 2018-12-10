@@ -1,3 +1,7 @@
+"""
+This script generates a learning curve for the model trained on the VR data.
+"""
+
 from qml.aglaia.aglaia import ARMP
 import numpy as np
 import h5py
@@ -22,23 +26,21 @@ idx_test = np.where(traj_idx == 22)[0]
 idx_train = np.where(traj_idx != 22)[0]
 np.random.shuffle(idx_train)
 
-acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":100.06564927139748, "eta":39.81824764370754}
-
 tot_samples_train = xyz_isopent[idx_train].shape[0]
-tot_samples_test = xyz_isopent[idx_test].shape[0]
 n_samples = [100, 300, 1000, 3000, 10000, tot_samples_train]
 
 scores = []
 traj_scores = []
 
 # Creating the estimator
+acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":100.06564927139748, "eta":39.81824764370754}
 estimator = ARMP(iterations=2633, batch_size=22, l1_reg=1.46e-05, l2_reg=0.0001, learning_rate=0.0013, representation_name='acsf',
                  representation_params=acsf_params, tensorboard=True, store_frequency=25, hidden_layer_sizes=(185,))
 
 estimator.set_properties(ene_isopent)
 estimator.generate_representation(xyz_isopent, zs_isopent, method="fortran")
 
-
+# Training the model on 3 folds of n data points
 for n in n_samples:
 
     cv_idx = idx_train[:n]
@@ -64,5 +66,6 @@ for n in n_samples:
     scores.append(scores_per_fold)
     traj_scores.append(traj_scores_per_fold)
 
-np.savez("scores_vr_5-12-2018.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
+# Saving the data to an .npz file
+np.savez("scores_vr.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
 

@@ -25,6 +25,7 @@ acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":
 estimator = ARMP(iterations=2633, batch_size=22, l1_reg=1.46e-05, l2_reg=0.0001, learning_rate=0.0013, representation_name='acsf',
                  representation_params=acsf_params, tensorboard=True, store_frequency=25, hidden_layer_sizes=(185,))
 
+# Loading the model previously trained
 estimator.load_nn("vr-nn")
 estimator.set_properties(ene_surface)
 
@@ -35,9 +36,11 @@ end = time.time()
 print("The time taken to generate the representations is %s s" % (str(end-start)))
 print("The shape of the representations is %s" % (str(estimator.representation.shape)))
 
+# Predicting the energies
 idx = list(range(n_samples))
 predictions = estimator.predict(idx)
 
+# Saving the results to a HDF5 file
 f = h5py.File("VR-NN_surface_predictions.hdf5", "w")
 f.create_dataset("ch_dist_alk", ch_dist_alk.shape, data=ch_dist_alk)
 f.create_dataset("ch_dist_cn", ch_dist_cn.shape, data=ch_dist_cn)
