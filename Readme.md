@@ -7,5 +7,9 @@ It contains 3 folders:
 
 2. Generating the results: folder `qml_scripts` contains all the scripts used to generate the results.
 
-3. Plotting: folder `plotting_results` contains the scripts used to plot the results. 
+3. Plotting: folder `plotting_results` contains the scripts used to plot the results.
+
+In order to run the scripts in the folder `qml_scripts`, one needs to have installed QML (using the development branch). 
+
+[Instructions to come] 
 
