@@ -1,11 +1,17 @@
+"""
+This script generates a learning curve for the the model trained on the constrained MD data set.
+"""
+
 from qml.aglaia.aglaia import ARMP
 import numpy as np
 import h5py
 from sklearn import model_selection as modsel
 import tensorflow as tf
+import os
 
 # Getting the dataset
-data = h5py.File("/home/sa16246/data_sets/cn_reactions/constrained_md/cn_isopentane_md_without_exploded.hdf5", "r")
+cwd = os.path.dirname(os.path.realpath(__file__))
+data = h5py.File(cwd + "../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
 
 xyz_isopent = np.array(data.get("xyz"))
 ene_isopent = np.array(data.get("ene"))*2625.50
@@ -20,7 +26,6 @@ idx_train = np.where(h_id != 2)[0]
 np.random.shuffle(idx_train)
 
 tot_samples_train = xyz_isopent[idx_train].shape[0]
-tot_samples_test = xyz_isopent[idx_test].shape[0]
 n_samples = [100, 300, 1000, 3000, tot_samples_train]
 
 scores = []
@@ -33,7 +38,7 @@ estimator = ARMP(iterations=5283, batch_size=37, l1_reg=8.931599068573057e-06, l
 estimator.set_properties(ene_isopent)
 estimator.generate_representation(xyz_isopent, zs_isopent, method="fortran")
 
-
+# Training the model on 3 folds of n samples
 for n in n_samples:
 
     cv_idx = idx_train[:n]
@@ -49,6 +54,7 @@ for n in n_samples:
 
         estimator.fit(idx_train_fold)
 
+        # Scoring the model
         score = estimator.score(idx_test_fold)
         traj_score = estimator.score(idx_test)
         scores_per_fold.append(score)
@@ -59,5 +65,6 @@ for n in n_samples:
     scores.append(scores_per_fold)
     traj_scores.append(traj_scores_per_fold)
 
+# Saving the results to a .npz file
 np.savez("scores_md_5-12-2018.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
 
