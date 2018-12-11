@@ -66,5 +66,5 @@ for n in n_samples:
     traj_scores.append(traj_scores_per_fold)
 
 # Saving the results to a .npz file
-np.savez("scores_md.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
+np.savez("./plot/scores_md.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
 
