@@ -10,4 +10,8 @@ It contains 3 folders:
 ## Instructions for QML installation
 
 
+## What does NarupaXR look like?
 
+You can view a video of the NarupaXR in action [here](https://www.youtube.com/watch?v=oUdHrNsiXlA).
+
+ ![Image](visuals/narupaxr.png?raw=true)
