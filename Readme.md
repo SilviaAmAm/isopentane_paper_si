@@ -14,6 +14,34 @@ It contains 4 folders:
 
 ## Instructions for QML installation
 
+Go to [this fork](https://github.com/SilviaAmAm/qml) of the QML repository and clone it:
+
+```
+git clone https://github.com/SilviaAmAm/qml.git
+cd qml
+```
+
+Then, check out the version that has been used to produce the results in the paper:
+
+```
+git checkout develop
+git checkout e2feecfb559073c79647fec9039c97fd2e2232e9
+```
+
+Now that the right version has been checked out, you can install it:
+
+```
+python install setup.py
+```
+
+## Other packages needed
+
+In order to run the scripts, you will also need to install:
+
+1. TensorFlow or tensorflow-gpu (>= 1.9)
+2. H5py
+3. Matplotlib
+4. Seaborn
 
 ## What does NarupaXR look like?
 
