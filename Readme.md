@@ -9,10 +9,10 @@ It contains 3 folders:
 
 ## Instructions for QML installation
 
-Go to [this fork](https://github.com/SilviaAmAm/qml) of the QML repository and clone it:
+Go to the [QML repository](https://github.com/qmlcode/qml) and clone it:
 
 ```
-git clone https://github.com/SilviaAmAm/qml.git
+git clone https://github.com/qmlcode/qml.git
 cd qml
 ```
 
@@ -20,7 +20,7 @@ Then, check out the version that has been used to produce the results in the pap
 
 ```
 git checkout develop
-git checkout e2feecfb559073c79647fec9039c97fd2e2232e9
+git checkout 2b462070de3532a3e6d2487a7f138df9f8d84c06
 ```
 
 Now that the right version has been checked out, you can install it:
