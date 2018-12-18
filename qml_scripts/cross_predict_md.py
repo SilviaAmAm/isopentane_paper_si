@@ -23,7 +23,6 @@ zs_isopent = np.array(data["zs"], dtype=np.int32)
 # Shuffling the indices of the data and then selecting the first 10350 data points
 idx = list(range(len(ene_isopent)))
 shuffle(idx)
-idx = idx[:10350]
 
 # Appending the true energies to a list
 predictions = [ene_isopent[idx]]

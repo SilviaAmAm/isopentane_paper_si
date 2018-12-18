@@ -19,7 +19,7 @@ ene_isopent = ene_isopent - ref_ene
 zs_isopent = np.array(data["zs"], dtype=np.int32)
 
 # Shuffling the indices
-idx = list(range(10350))
+idx = list(range(9625))
 shuffle(idx)
 
 predictions = [ene_isopent[idx]]
