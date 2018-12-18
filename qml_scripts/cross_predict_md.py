@@ -10,7 +10,7 @@ import tensorflow as tf
 from random import shuffle
 import os
 
-# Getting the dataset
+# Getting the iMD-VR dataset
 cwd = os.path.dirname(os.path.realpath(__file__))
 data = h5py.File(cwd + "../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
 
@@ -20,9 +20,10 @@ ref_ene = -290.175 * 2625.50
 ene_isopent = ene_isopent - ref_ene
 zs_isopent = np.array(data["zs"], dtype=np.int32)
 
-# Shuffling the indices of the data and then selecting the first 10350 data points
+# Shuffling the indices of the data and then selecting the first 9625 data points
 idx = list(range(len(ene_isopent)))
 shuffle(idx)
+idx = idx[:9625]
 
 # Appending the true energies to a list
 predictions = [ene_isopent[idx]]
