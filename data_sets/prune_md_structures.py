@@ -25,7 +25,8 @@ cn_mask = (cn_distances < 1.5)
 # than 1.5 angstrom apart
 hh_distances = np.sum((xyz[:,h_mask,None] - xyz[:,None,h_mask])**2, axis=3)**0.5
 hh_distances += np.eye(h_mask.sum()) * 10
-hh_mask = (hh_distances > 0.9).all((1,2)) # Change to 1.5 to remove local minima
+# Change to 0.9 to remove only free H2, and not local minima
+hh_mask = (hh_distances > 1.5).all((1,2))
 
 ch_pairs = [(13,14), (13,15), (13,16), (6,12), (6,11),
             (1,7), (5,8), (5,9), (5,10), (0,2), (0,3), 
