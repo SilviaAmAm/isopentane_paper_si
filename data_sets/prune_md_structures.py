@@ -3,14 +3,13 @@ import h5py
 
 data = h5py.File("isopentane_cn_md_pbe.hdf5", "r")
 
-xyz = np.array(data.get("xyz"))
-ene = np.array(data.get("ene"))
-forces = np.array(data.get("forces"))
-zs = np.array(data.get("zs"), dtype=np.int32)
-snapshot_idx= np.array(data.get("snapshot_idx"))
-ch_dist_cn = np.array(data.get("ch_dist_cn"))
-ch_dist_alk = np.array(data.get("ch_dist_alk"))
-h_id = np.array(data.get("h_id"))
+xyz = np.asarray(data.get("xyz"))
+ene = np.asarray(data.get("ene"))
+zs = np.asarray(data.get("zs"), dtype=np.int32)
+snapshot_idx= np.asarray(data.get("snapshot_idx"))
+ch_dist_cn = np.asarray(data.get("ch_dist_cn"))
+ch_dist_alk = np.asarray(data.get("ch_dist_alk"))
+h_id = np.asarray(data.get("h_id"))
 
 
 h_mask = (zs[0] == 1)
@@ -45,6 +44,26 @@ for c_idx, h_idx in ch_pairs:
     mask *= ch_mask
 
 print(sum(mask), "remaining structures out of", len(mask))
+
+xyz = xyz[mask]
+ene = ene[mask]
+zs = zs[mask]
+snapshot_idx = snapshot_idx[mask]
+ch_dist_cn = ch_dist_cn[mask]
+ch_dist_alk = ch_dist_alk[mask]
+h_id = h_id[mask]
+
+
+f = h5py.File("cn_isopentane_md_new.hdf5", "w")
+
+f.create_dataset("h_id", h_id.shape, data=h_id)
+f.create_dataset("ch_dist_alk", ch_dist_alk.shape, data=ch_dist_alk)
+f.create_dataset("ch_dist_cn", ch_dist_cn.shape, data=ch_dist_cn)
+f.create_dataset("snapshot_idx", snapshot_idx.shape, data=snapshot_idx)
+f.create_dataset("xyz", xyz.shape, data=xyz)
+f.create_dataset("ene", ene.shape, data=ene)
+f.create_dataset("zs", zs.shape, data=zs)
+f.close()
 
 #idx = failed[0][1]
 #print(xyz[idx][0], h_id[idx])
