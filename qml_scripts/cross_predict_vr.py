@@ -8,9 +8,9 @@ import h5py
 from random import shuffle
 import os
 
-# Getting the dataset
+# Getting the CMD dataset
 cwd = os.path.dirname(os.path.realpath(__file__))
-data = h5py.File(cwd + "../data_sets/isopentane_cn_md_pbe.hdf5", "r")
+data = h5py.File(cwd + "/../data_sets/isopentane_cn_md_pbe.hdf5", "r")
 
 xyz_isopent = np.array(data.get("xyz"))
 ene_isopent = np.array(data.get("ene"))*2625.50
@@ -19,7 +19,7 @@ ene_isopent = ene_isopent - ref_ene
 zs_isopent = np.array(data["zs"], dtype=np.int32)
 
 # Shuffling the indices
-idx = list(range(10350))
+idx = list(range(len(ene_isopent)))
 shuffle(idx)
 
 predictions = [ene_isopent[idx]]

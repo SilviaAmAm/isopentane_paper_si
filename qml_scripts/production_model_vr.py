@@ -1,5 +1,5 @@
 """
-This script trains a model on 10350 data points of the data set sampled using VR.
+This script trains a model on 9625 data points of the data set sampled using VR.
 """
 
 from qml.aglaia.aglaia import ARMP
@@ -16,7 +16,7 @@ import os
 
 # Getting the dataset
 cwd = os.path.dirname(os.path.realpath(__file__))
-data = h5py.File(cwd + "../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
+data = h5py.File(cwd + "/../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
 
 xyz_isopent = np.array(data.get("xyz"))
 ene_isopent = np.array(data.get("ene"))*2625.50
@@ -32,7 +32,7 @@ idx_train = np.where(traj_idx!=22)[0]
 shuffle(idx_train)
 
 # Making sure that the model is trained on the same number of samples as the MD-NN
-idx_train_half = idx_train[:10350] 
+idx_train_half = idx_train[:9625]
 
 # Creating the estimator
 acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":100.06564927139748, "eta":39.81824764370754}

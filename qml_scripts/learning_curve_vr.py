@@ -11,7 +11,7 @@ import os
 
 # Getting the dataset
 cwd = os.path.dirname(os.path.realpath(__file__))
-data = h5py.File(cwd + "../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
+data = h5py.File(cwd + "/../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
 
 xyz_isopent = np.array(data.get("xyz"))
 ene_isopent = np.array(data.get("ene"))*2625.50
@@ -67,5 +67,5 @@ for n in n_samples:
     traj_scores.append(traj_scores_per_fold)
 
 # Saving the data to an .npz file
-np.savez("scores_vr.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
+np.savez("./plot/scores_vr.npz", np.asarray(n_samples), np.asarray(scores), np.asarray(traj_scores))
 

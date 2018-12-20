@@ -9,7 +9,7 @@ import os
 
 # Data to predict
 cwd = os.path.dirname(os.path.realpath(__file__))
-data = h5py.File(cwd + "../data_sets/isopentane_cn_surface_pbe.hdf5", "r")
+data = h5py.File(cwd + "/../data_sets/isopentane_cn_surface_pbe.hdf5", "r")
 
 ene_surface = np.array(data.get("ene"))
 xyz_surface = np.array(data.get("xyz"))
