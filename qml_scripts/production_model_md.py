@@ -1,5 +1,5 @@
 """
-This script trains a model on 9625 samples of the constrained MD data set.
+This script trains a model on 7621 samples of the constrained MD data set.
 """
 
 from qml.aglaia.aglaia import ARMP
@@ -23,9 +23,7 @@ h_id = np.array(data.get("h_id"))
 idx_test = np.where(h_id == 2)[0]
 idx_train = np.where(h_id != 2)[0]
 shuffle(idx_train)
-
-# Making sure that the model is trained on the same number of samples as the VR-NN
-idx_train_half = idx_train[:6939]
+print("There are %i points in the training set and %i in the test set" % (len(idx_train), len(idx_test)))
 
 # Creating the estimator
 acsf_params = {"nRs2":10, "nRs3":10, "nTs":10, "rcut":3.18, "acut":3.18, "zeta":52.779232035094125, "eta":1.4954812022150898}
@@ -35,7 +33,7 @@ estimator.set_properties(ene_isopent)
 estimator.generate_representation(xyz_isopent, zs_isopent, method="fortran")
 
 # Fitting the estimator and scoring it
-estimator.fit(idx_train_half)
+estimator.fit(idx_train)
 score = estimator.score(idx_test)
 
 # Saving the model for later use
