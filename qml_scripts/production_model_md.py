@@ -10,7 +10,7 @@ import os
 
 # Getting the dataset
 cwd = os.path.dirname(os.path.realpath(__file__))
-data = h5py.File(cwd + "/../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
+data = h5py.File(cwd + "/../data_sets/isopentane_cn_md_pbe.hdf5", "r")
 
 xyz_isopent = np.array(data.get("xyz"))
 ene_isopent = np.array(data.get("ene"))*2625.50
@@ -20,12 +20,12 @@ zs_isopent = np.array(data.get("zs"), dtype=np.int32)
 h_id = np.array(data.get("h_id"))
 
 # Finding the indices of the last trajectory so that it can be used as a test set
-idx_test = np.where(h_id == 2)
-idx_train = np.where(h_id != 2)
+idx_test = np.where(h_id == 2)[0]
+idx_train = np.where(h_id != 2)[0]
 shuffle(idx_train)
 
 # Making sure that the model is trained on the same number of samples as the VR-NN
-idx_train_half = idx_train[:9625]
+idx_train_half = idx_train[:6939]
 
 # Creating the estimator
 acsf_params = {"nRs2":10, "nRs3":10, "nTs":10, "rcut":3.18, "acut":3.18, "zeta":52.779232035094125, "eta":1.4954812022150898}
