@@ -16,7 +16,7 @@ ene_ref = -290.175 * 2625.50
 # # Uncomment this to plot the VR-NN predicted surface (Energy units: kJ/mol)
 data = h5py.File("VR-NN_surface_predictions.hdf5", "r")
 # # Uncomment this to plot the MD-NN predicted surface (Energy units: kJ/mol)
-# data = h5py.File("VR-NN_surface_predictions.hdf5", "r")
+# data = h5py.File("MD-NN_surface_predictions.hdf5", "r")
 
 # Extracting the data (If plotting the DFT surface, uncomment unit conversion!)
 xyz = np.array(data.get("xyz"))

@@ -1,16 +1,10 @@
 """
-This script trains a model on 9625 data points of the data set sampled using VR.
+This script trains a model on 7621 data points of the data set sampled using VR.
 """
 
 from qml.aglaia.aglaia import ARMP
 import numpy as np
 import h5py
-import matplotlib
-matplotlib.use('pdf')
-import matplotlib.pyplot as plt
-from sklearn import model_selection as modsel
-import tensorflow as tf
-import time
 from random import shuffle
 import os
 
@@ -32,7 +26,7 @@ idx_train = np.where(traj_idx!=22)[0]
 shuffle(idx_train)
 
 # Making sure that the model is trained on the same number of samples as the MD-NN
-idx_train_half = idx_train[:9625]
+idx_train_half = idx_train[:7621]
 
 # Creating the estimator
 acsf_params = {"nRs2":14, "nRs3":14, "nTs":14, "rcut":3.29, "acut":3.29, "zeta":100.06564927139748, "eta":39.81824764370754}

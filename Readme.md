@@ -45,6 +45,6 @@ In order to run the scripts, you will also need to install:
 
 ## What does NarupaXR look like?
 
-You can view a video of the NarupaXR in action [here](https://www.youtube.com/watch?v=oUdHrNsiXlA).
+You can view a video of the NarupaXR in action [here](https://vimeo.com/310557619).
 
  ![Image](visuals/narupaxr.png?raw=true)
