@@ -11,6 +11,8 @@ It contains 4 folders:
 
 4. [qml_scripts](./qml_scripts): All the scripts used to fit the neural networks that recreate the results in the paper.
 
+5. [trained_nn](./trained_nn): The saved NNs after training.
+
 
 ## Instructions for QML installation
 
