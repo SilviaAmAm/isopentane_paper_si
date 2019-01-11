@@ -9,6 +9,8 @@ It contains 4 folders:
 
 3. [data_sets](./data_sets): All the data sets that were used for the generation of the results in the paper.
 
+4. [osprey](./osprey): Scripts related to hyper-parameter optimization using Osprey.
+
 4. [qml_scripts](./qml_scripts): All the scripts used to fit the neural networks that recreate the results in the paper.
 
 5. [trained_nn](./trained_nn): The saved NNs after training.
