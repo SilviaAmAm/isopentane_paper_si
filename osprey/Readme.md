@@ -1,6 +1,6 @@
 # Hyper-parameter optimization with Osprey
 
-This folder contains all scripts to reproduce the hyper-parameter optimization. We used a custom fork of osprey, available [here](https://github.com/larsbratholm/osprey). The commit used was `b0d2f15`.
+This folder contains all scripts to reproduce the hyper-parameter optimization. We used a custom fork of osprey, available [here](https://github.com/larsbratholm/osprey). The commit used was `4bfbb14`.
 
 ## Creating a model for use with osprey
 
