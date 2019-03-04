@@ -6,6 +6,8 @@ This folder contains all of the data sets used in the paper:
 2. `isopentane_cn_md_pbe.hdf5` 
 3. `isopentane_cn_surface_pbe.hdf5`
 
+as well as some [scripts](./scripts) used in constructing/transforming the data.
+
 ## 1. VR sampled data 
 
 This is the data obtained from sampling the potential energy surface with the VR (using PM6). The energies have been recalculated using CF-uPBE with TZVP basis set. The energies are in Hartrees. The data from this data set can be extracted as follows:
