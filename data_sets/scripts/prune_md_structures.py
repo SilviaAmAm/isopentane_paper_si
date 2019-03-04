@@ -1,7 +1,7 @@
 import numpy as np
 import h5py
 
-data = h5py.File("isopentane_cn_md_pbe.hdf5", "r")
+data = h5py.File("../isopentane_cn_md_pbe.hdf5", "r")
 
 xyz = np.asarray(data.get("xyz"))
 ene = np.asarray(data.get("ene"))
