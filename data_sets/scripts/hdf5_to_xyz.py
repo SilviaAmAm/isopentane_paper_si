@@ -29,7 +29,7 @@ def write_xyz(xyz, nuclear_charges, traj_idx, count):
 
 if __name__ == "__main__":
     
-    data = h5py.File("cn_isopentane_pm6_better_pruned.hdf5")
+    data = h5py.File("../isopentane_cn_md_pbe.hdf5")
     idx = np.asarray(data.get("traj_idx"))
     zs = np.asarray(data.get("zs"))
     xyz = np.asarray(data.get("xyz"))
