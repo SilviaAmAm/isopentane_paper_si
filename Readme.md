@@ -1,6 +1,7 @@
 # Supporting Information
 
-This repository contains all the scripts that were used to generate the data reported in the paper XXX.
+This repository contains all the scripts that were used to generate the data reported in the paper [Training neural nets to learn reactive potential energy surfaces using interactive quantum chemistry in virtual reality](https://arxiv.org/abs/1901.05417).
+
 It contains 4 folders:
 
 1. [molpro](./molpro): Input files to Molpro for running the constrained optimizations and single point energies and forces.
