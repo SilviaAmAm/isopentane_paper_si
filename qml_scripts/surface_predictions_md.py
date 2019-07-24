@@ -6,11 +6,12 @@ from qml.aglaia.aglaia import ARMP
 import numpy as np
 import h5py
 import time
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import os
 
 # Getting the dataset
 cwd = os.path.dirname(os.path.realpath(__file__))
-data = h5py.File(cwd + "/../data_sets/isopentane_cn_vr_pbe.hdf5", "r")
+data = h5py.File(cwd + "/../data_sets/isopentane_cn_surface_pbe.hdf5", "r")
 
 ene_surface = np.array(data.get("ene"))
 xyz_surface = np.array(data.get("xyz"))
@@ -27,7 +28,7 @@ acsf_params = {"nRs2":10, "nRs3":10, "nTs":10, "rcut":3.18, "acut":3.18, "zeta":
 estimator = ARMP(iterations=5283, batch_size=37, l1_reg=8.931599068573057e-06, l2_reg=3.535679697949907e-05, learning_rate=0.0008170485394812195, representation_name='acsf', representation_params=acsf_params, tensorboard=True, store_frequency=25, hidden_layer_sizes=(15,88))
 
 # Loading the model previously trained
-estimator.load_nn("md-nn")
+estimator.load_nn("../trained_nn/md-nn")
 estimator.set_properties(ene_surface)
 
 # Generating the representation
@@ -40,6 +41,9 @@ print("The shape of the representations is %s" % (str(estimator.representation.s
 # Predicting the energies
 idx = list(range(n_samples))
 predictions = estimator.predict(idx)
+
+mae = mean_absolute_error(ene_surface, predictions)
+print("The MAE is %.2f kJ/mol" % mae)
 
 # Saving the results to a hdf5 file
 f = h5py.File("MD-NN_surface_predictions.hdf5", "w")

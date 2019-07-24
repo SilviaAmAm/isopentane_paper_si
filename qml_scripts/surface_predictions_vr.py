@@ -5,6 +5,7 @@ from qml.aglaia.aglaia import ARMP
 import numpy as np
 import h5py
 import time
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import os
 
 # Data to predict
@@ -26,7 +27,7 @@ estimator = ARMP(iterations=2633, batch_size=22, l1_reg=1.46e-05, l2_reg=0.0001,
                  representation_params=acsf_params, tensorboard=True, store_frequency=25, hidden_layer_sizes=(185,))
 
 # Loading the model previously trained
-estimator.load_nn("vr-nn")
+estimator.load_nn("../trained_nn/vr-nn")
 estimator.set_properties(ene_surface)
 
 # Generating the representation
@@ -39,6 +40,10 @@ print("The shape of the representations is %s" % (str(estimator.representation.s
 # Predicting the energies
 idx = list(range(n_samples))
 predictions = estimator.predict(idx)
+
+# Printing the mean absolute error
+mae = mean_absolute_error(ene_surface, predictions)
+print("The MAE is %.2f kJ/mol" % mae)
 
 # Saving the results to a HDF5 file
 f = h5py.File("VR-NN_surface_predictions.hdf5", "w")
