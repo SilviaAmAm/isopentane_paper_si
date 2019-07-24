@@ -8,11 +8,15 @@ import time
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import os
 
+# Reference energy
+ene_ref = -290.175 * 2625.50
+
 # Data to predict
 cwd = os.path.dirname(os.path.realpath(__file__))
 data = h5py.File(cwd + "/../data_sets/isopentane_cn_surface_pbe.hdf5", "r")
 
 ene_surface = np.array(data.get("ene"))
+ene_surface = ene_surface*2625.5 - ene_ref
 xyz_surface = np.array(data.get("xyz"))
 zs_surface = np.array(data.get("zs"))
 ch_dist_alk = np.array(data.get("ch_dist_alk"))
